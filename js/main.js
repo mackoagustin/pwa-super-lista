@@ -35,38 +35,48 @@ function renderLista() {
     const ul = document.createElement('ul')
     ul.classList.add('demo-list-icon', 'md.list')
 
-    listadoDeProductos.forEach((producto, index) => {
-        ul.innerHTML += `
+    listadoDeProductos.forEach((prod, index) => {
+        ul.innerHTML += 
+        `
             <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content w-10">
-                        <i class="material-icons mdl-list__item-icon ">shopping_cart</i>
-                    </span>
-
-
-                    <span class="mdl-list__item-primary-content w-50"> ${producto.nombre}</span>
-                    
-                    <span class="mdl-list__item-primary-content w-30" >
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input value=${producto.cantidad} class="mdl-textfield__input" type="text" id="cantidad-${index}">
+                <!-- ícono del producto -->
+                <span class="mdl-list__item-primary-content w-10">
+                    <i class="material-icons mdl-list__item-icon">shopping_cart</i>
+                </span>
+    
+                <!-- nombre del producto -->
+                <span class="mdl-list__item-primary-content w-30">
+                    ${prod.nombre}
+                </span>
+    
+                <!-- cantidad de producto -->
+                <span class="mdl-list__item-primary-content w-20">
+                    <!-- Textfield with Floating Label -->
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input onblur="cambiarValorProd('cantidad',${index},this)" value="${prod.cantidad}" class="mdl-textfield__input" type="text" id="cantidad-${index}">
                         <label class="mdl-textfield__label" for="cantidad-${index}">Cantidad</label>
-                        </div>
-                    </span>
-
-                    <span class="mdl-list__item-primary-content w-30 ml-10">
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input value=${producto.precio}  class="mdl-textfield__input" type="text" id="precio-${index}">
-                        <label class="mdl-textfield__label" for="precio-${index}">precio</label>
-                        </div>
-                    </span>
-
-                    <span class="mdl-list__item-primary-content w-10 ml-10">
-                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored ">
+                    </div>
+                </span>
+    
+                <!-- precio de producto -->
+                <span class="mdl-list__item-primary-content w-20 ml-item">
+                    <!-- Textfield with Floating Label -->
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input onblur="cambiarValorProd('precio',${index},this)" value="${prod.precio}" class="mdl-textfield__input" type="text" id="precio-${index}">
+                        <label class="mdl-textfield__label" for="precio-${index}">Precio</label>
+                    </div>
+                </span>
+    
+                <!-- botón de borrado individual del producto en la lista -->
+                <span class="mdl-list__item-primary-content w-20 ml-item">
+                    <!-- Colored FAB button with ripple -->
+                    <button onclick="borrarProd(${index})"
+                        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">remove_shopping_cart</i>
-                      </button>
-                    </span>
+                    </button>
+                </span>
             </li>
-    `;
+        `
     })
 
 
